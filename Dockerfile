@@ -12,7 +12,8 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci
 COPY --from=templ-generator /app ./
-RUN npm run tailwindcss -- -m -i ./assets/tailwind.css -o ./assets/dist/styles.min.css
+RUN npx tailwindcss -m -i ./assets/tailwind.css -o ./assets/dist/styles.min.css
+
 
 # Stage 3: Build the Go application
 FROM golang:alpine AS go-builder
