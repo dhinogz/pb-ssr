@@ -1,6 +1,8 @@
 package router
 
 import (
+	"net/http"
+
 	"github.com/labstack/echo/v5"
 	"github.com/labstack/echo/v5/middleware"
 	"github.com/pocketbase/pocketbase/core"
@@ -33,6 +35,10 @@ func (ar *AppRouter) SetupRoutes(live bool) error {
 	ar.Router.POST("/register", ar.PostRegister)
 	ar.Router.POST("/logout", ar.PostLogout)
 	ar.Router.GET("/error", ar.GetError)
+
+	ar.Router.GET("/settings", func(c echo.Context) error {
+		return c.String(http.StatusOK, "settings")
+	})
 
 	ar.Router.PATCH("/task/:id", ar.ToggleTask)
 	ar.Router.POST("/list/:id/task", ar.CreateTask)
