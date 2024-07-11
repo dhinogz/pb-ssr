@@ -7,7 +7,7 @@ COPY . .
 RUN templ generate
 
 # Stage 2: Build CSS
-FROM node:10-alpine AS css-builder
+FROM node:20-alpine AS css-builder
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci
